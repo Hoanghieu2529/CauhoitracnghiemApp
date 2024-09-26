@@ -1,5 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.*;
@@ -17,6 +19,7 @@ public class MainPage extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         startClock();
+        
           // Cập nhật thời gian hiện tại
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         String currentTime = sdf.format(new Date());
@@ -42,6 +45,7 @@ public class MainPage extends javax.swing.JFrame {
         private void updateGreeting() {
        jLabelTenSV.setText("<html>Chào <b>" + userName.toUpperCase() + "</b>,</html>");
     }
+      
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -122,10 +126,7 @@ public class MainPage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,6 +134,7 @@ public class MainPage extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonBatdau2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBatdau2ActionPerformed

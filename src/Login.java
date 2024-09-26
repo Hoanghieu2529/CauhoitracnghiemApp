@@ -7,6 +7,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
+       
     }
 
     /**
@@ -207,6 +208,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonExit;
