@@ -156,6 +156,7 @@ public class Login extends javax.swing.JFrame {
         MainPage mainPage = new MainPage(userName,userMSSV);  // Khởi tạo trang chính va truyen ten bien
         mainPage.setVisible(true);           // Hiển thị trang chính
         Login.this.setVisible(false);        // Ẩn trang đăng nhập
+        mainPage.setLocationRelativeTo(null);
     
     }//GEN-LAST:event_jButtonStartActionPerformed
 

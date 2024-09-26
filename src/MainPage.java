@@ -1,19 +1,43 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MainPage extends javax.swing.JFrame {
-
+   
     private String userName;
-
+    
     /**
      * Creates new form MainPage
      */
     public MainPage() {
         initComponents();
         setLocationRelativeTo(null);
+        startClock();
+          // Cập nhật thời gian hiện tại
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        String currentTime = sdf.format(new Date());
+        jLabelTimedn.setText("Đăng nhập lúc: " + currentTime); 
     }
 
     MainPage(String userName, String userMSSV) {
         this.userName = userName;
         initComponents();
         updateGreeting();
+        startClock(); // Khởi động đồng hồ
+    }
+     private void startClock() {
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                jLabelTimedn.setText("Thời gian: " + sdf.format(new Date()));
+            }
+        });
+        timer.start();
     }
         private void updateGreeting() {
        jLabelTenSV.setText("<html>Chào <b>" + userName.toUpperCase() + "</b>,</html>");
@@ -29,43 +53,95 @@ public class MainPage extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabelTenSV = new javax.swing.JLabel();
+        jLabelTimedn = new javax.swing.JLabel();
+        jLabelHuongdan = new javax.swing.JLabel();
+        jButtonBatdau2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cau hoi Trac nghiem - Huong dan");
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabelTenSV.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabelTenSV.setText("tenSV");
+
+        jLabelTimedn.setFont(new java.awt.Font("Times New Roman", 0, 10)); // NOI18N
+        jLabelTimedn.setText("loading");
+
+        jLabelHuongdan.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabelHuongdan.setText("<html>\n<b>HƯỚNG DẪN LÀM BÀI:</b><br>\n<p style=\"text-indent: 0px; margin-left: 0px;\">1. Nhấn nút Bắt đầu để bắt đầu Bài kiểm tra.</p>\n<p style=\"text-indent: 0px; margin-left: 0px;\">2. Đọc kỹ câu hỏi trước khi chọn đáp án.</p>\n<p style=\"text-indent: 0px; margin-left: 0px;\">3. Tổng cộng có 10 câu hỏi, mỗi câu hỏi trị giá 5 điểm.</p>\n<p style=\"text-indent: 0px; margin-left: 0px;\">4. Số điểm đạt: > 23 điểm.</p>\n<p style=\"text-indent: 0px; margin-left: 0px;\">5. Tổng điểm tối đa: 50 điểm.</p>\n<p style=\"text-indent: 0px; margin-left: 0px;\">6. Không giới hạn thời gian làm bài.</p>\n<p style=\"text-indent: 0px; margin-center: 0px;\"><b><i>Chúc bạn làm bài thật tốt!</i></b></p>\n</html>\n");
+
+        jButtonBatdau2.setBackground(new java.awt.Color(204, 255, 204));
+        jButtonBatdau2.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        jButtonBatdau2.setForeground(new java.awt.Color(0, 51, 51));
+        jButtonBatdau2.setText("BẮT ĐẦU");
+        jButtonBatdau2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBatdau2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelTenSV, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(315, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabelHuongdan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabelTenSV)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabelTimedn, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonBatdau2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabelTenSV)
-                .addGap(0, 220, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonBatdau2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabelTenSV)
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabelHuongdan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                        .addComponent(jLabelTimedn)))
+                .addGap(17, 17, 17))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 62, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonBatdau2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBatdau2ActionPerformed
+        // TODO add your handling code here:
+        QuestionsPage questionPage = new QuestionsPage(); // Create an instance of the QuestionPage
+        questionPage.setVisible(true); // Make QuestionPage visible
+        MainPage.this.setVisible(false);// Hide MainPage
+        questionPage.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jButtonBatdau2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -103,7 +179,12 @@ public class MainPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonBatdau2;
+    private javax.swing.JLabel jLabelHuongdan;
     private javax.swing.JLabel jLabelTenSV;
+    private javax.swing.JLabel jLabelTimedn;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+   
 }
