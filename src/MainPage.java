@@ -11,6 +11,7 @@ import java.util.Date;
 public class MainPage extends javax.swing.JFrame {
    
     private String userName;
+    private String userMSSV;
     
     /**
      * Creates new form MainPage
@@ -29,6 +30,7 @@ public class MainPage extends javax.swing.JFrame {
     MainPage(String userName, String userMSSV) {
         this.userName = userName;
         initComponents();
+        this.userMSSV = userMSSV;
         updateGreeting();
         startClock(); // Khởi động đồng hồ
     }
@@ -73,7 +75,7 @@ public class MainPage extends javax.swing.JFrame {
         jLabelTimedn.setText("loading");
 
         jLabelHuongdan.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabelHuongdan.setText("<html>\n<b>HƯỚNG DẪN LÀM BÀI:</b><br>\n<p style=\"text-indent: 0px; margin-left: 0px;\">1. Nhấn nút Bắt đầu để bắt đầu Bài kiểm tra.</p>\n<p style=\"text-indent: 0px; margin-left: 0px;\">2. Đọc kỹ câu hỏi trước khi chọn đáp án.</p>\n<p style=\"text-indent: 0px; margin-left: 0px;\">3. Tổng cộng có 10 câu hỏi, mỗi câu hỏi trị giá 5 điểm.</p>\n<p style=\"text-indent: 0px; margin-left: 0px;\">4. Số điểm đạt: > 23 điểm.</p>\n<p style=\"text-indent: 0px; margin-left: 0px;\">5. Tổng điểm tối đa: 50 điểm.</p>\n<p style=\"text-indent: 0px; margin-left: 0px;\">6. Không giới hạn thời gian làm bài.</p>\n<p style=\"text-indent: 0px; margin-center: 0px;\"><b><i>Chúc bạn làm bài thật tốt!</i></b></p>\n</html>\n");
+        jLabelHuongdan.setText("<html> <b>HƯỚNG DẪN LÀM BÀI:</b><br> <p style=\"text-indent: 0px; margin-left: 0px;\">1. Nhấn nút Bắt đầu để bắt đầu Bài kiểm tra.</p> <p style=\"text-indent: 0px; margin-left: 0px;\">2. Đọc kỹ câu hỏi trước khi chọn đáp án.</p> <p style=\"text-indent: 0px; margin-left: 0px;\">3. Tổng cộng có 10 câu hỏi, mỗi câu hỏi trị giá 1 điểm.</p> <p style=\"text-indent: 0px; margin-left: 0px;\">4. Số điểm đạt: > 5 điểm.</p> <p style=\"text-indent: 0px; margin-left: 0px;\">5. Tổng điểm tối đa: 10 điểm.</p> <p style=\"text-indent: 0px; margin-left: 0px;\">6. Không giới hạn thời gian làm bài.</p> <p style=\"text-indent: 0px; margin-center: 0px;\"><b><i>Chúc bạn làm bài thật tốt!</i></b></p> </html> ");
 
         jButtonBatdau2.setBackground(new java.awt.Color(204, 255, 204));
         jButtonBatdau2.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
@@ -139,7 +141,7 @@ public class MainPage extends javax.swing.JFrame {
 
     private void jButtonBatdau2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBatdau2ActionPerformed
         // TODO add your handling code here:
-        QuestionsPage questionPage = new QuestionsPage(); // Create an instance of the QuestionPage
+        QuestionsPage questionPage = new QuestionsPage(userName, userMSSV); // Create an instance of the QuestionPage
         questionPage.setVisible(true); // Make QuestionPage visible
         MainPage.this.setVisible(false);// Hide MainPage
         questionPage.setLocationRelativeTo(null);

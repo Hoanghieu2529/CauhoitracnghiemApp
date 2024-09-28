@@ -148,7 +148,7 @@ public class Login extends javax.swing.JFrame {
             return; // Stop further processing
             }
     
-    // Check if the commitment checkbox is not selected
+         // Check if the commitment checkbox is not selected
         if (!jCheckBoxCamket.isSelected()) {
             JOptionPane.showMessageDialog(this, "Bạn phải cam kết không gian lận trước khi bắt đầu.", "Thông báo", JOptionPane.ERROR_MESSAGE);
         return; // Stop further processing

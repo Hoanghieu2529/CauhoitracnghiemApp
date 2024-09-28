@@ -1,0 +1,11 @@
+#Bài thi giua ky môn cong nghe Java
+#GV: Su Nhat Ha
+
+Sử dụng CardLayout thiết kế bài thi trắc nghiệm gồm nhiều trang, các button first, prev, next, last, ...
+
+#Su dung JDK 22 64bit
+#Netbeans v23
+
+****************************
+@copyright 2024 Hieu23210111
+****************************

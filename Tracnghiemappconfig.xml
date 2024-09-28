@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>D:\IT\UIT\HK3\Cong nghe JAVA\GK\Java\CauhoitracnghiemApp\dist\CauhoiTN.jar</jar>
+  <outfile>D:\IT\UIT\HK3\Cong nghe JAVA\GK\Java\CauhoitracnghiemApp\TracNghiem.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>https://download.oracle.com/java/23/latest/jdk-23_windows-x64_bin.exe</downloadUrl>
+  <supportUrl>https://t.me/kenhoang95</supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>D:\IT\UIT\HK3\Cong nghe JAVA\Logo maker project.ico</icon>
+  <jre>
+    <path>%JAVA_HOME%;%PATH%</path>
+    <requiresJdk>true</requiresJdk>
+    <requires64Bit>false</requires64Bit>
+    <minVersion>1.22</minVersion>
+    <maxVersion></maxVersion>
+  </jre>
+  <versionInfo>
+    <fileVersion>1.0.0.1</fileVersion>
+    <txtFileVersion>1.0.0.1</txtFileVersion>
+    <fileDescription>Ung dung cau hoi trac nghiem</fileDescription>
+    <copyright>@2024 NguyenDuyHieu2321011-UIT</copyright>
+    <productVersion>1.0.0.1</productVersion>
+    <txtProductVersion>1.0.0.1</txtProductVersion>
+    <productName>Ung dung cau hoi trac nghiem</productName>
+    <companyName>Nguyen Duy Hieu 2321011-UIT</companyName>
+    <internalName>TracNghiemApp</internalName>
+    <originalFilename>TracNghiem.exe</originalFilename>
+    <trademarks></trademarks>
+    <language>ENGLISH_US</language>
+  </versionInfo>
+</launch4jConfig>

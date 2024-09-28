@@ -1,21 +1,30 @@
 import java.awt.BorderLayout;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+//import java.io.File;
+//import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
+//import javax.swing.JScrollPane;
+//import javax.swing.ScrollPaneConstants;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 
 public class QuestionsPage extends javax.swing.JFrame {
     private ArrayList<Question> questions = new ArrayList<>();
     private int currentQuestionIndex = 0;
+    private Object question;
+    private String userName;
+    private String userMSSV;
 
     /**
      * Creates new form QuestionsPage
      */
-    public QuestionsPage() {
+    public QuestionsPage(String userName, String userMSSV) {
+       this.userName = userName;
+       this.userMSSV = userMSSV;
+       setTitle("Cau hoi trac nghiem - " + userMSSV);
         initComponents();
         setLocationRelativeTo(null);
         questions = new ArrayList<>();
@@ -31,18 +40,20 @@ public class QuestionsPage extends javax.swing.JFrame {
 //        jPanelQuestion.add(jScrollPaneQuestion, BorderLayout.CENTER);
 
     }
+
+     
     private void loadQuestionsFromFile() {
-    String file = "database.txt";
-    try (
-            BufferedReader br = new BufferedReader(new FileReader(file))) {
+    String path = "/database.txt";
+    try (InputStream is = getClass().getResourceAsStream(path);
+            BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
         String line;
         while ((line = br.readLine()) != null) {
             String[] parts = line.split(";");
-            String question = parts[0];
-            String[] options = {parts[1], parts[2], parts[3], parts[4]};
+            String question = parts[0].trim();
+            String[] options = {parts[1].trim(), parts[2].trim(), parts[3].trim(), parts[4].trim()};
 //            char correctAnswer = parts[5].charAt(0);
 //            questions.add(new Question(question, options, correctAnswer));
-            String correctAnswer = parts[5]; // Directly take the correct answer string
+            String correctAnswer = parts[5].trim(); // Directly take the correct answer string
             questions.add(new Question(question, options, correctAnswer));
 
         }
@@ -65,15 +76,45 @@ public class QuestionsPage extends javax.swing.JFrame {
         Question currentQuestion = questions.get(index);
         // Use HTML tags to enable line wrapping in JLabel
         jLabelQuestion.setText("<html><body style='width: 350px'; text-align: center>" + currentQuestion.getQuestionText() + "</body></html>");
-        
         jRadioButton1.setText("<html>" + currentQuestion.getOptions()[0] + "</html>");
         jRadioButton2.setText("<html>" + currentQuestion.getOptions()[1] + "</html>");
         jRadioButton3.setText("<html>" + currentQuestion.getOptions()[2] + "</html>");
         jRadioButton4.setText("<html>" + currentQuestion.getOptions()[3] + "</html>");
         
+        // Clear sectiọn
+        buttonGroup1.clearSelection();
+        
+        // check user answer and select the corresponding radio
+        String userAnswer = currentQuestion.getUserAnswer();
+        if (userAnswer.isEmpty()) {
+            buttonGroup1.clearSelection();  // Ensures no selection if no answer has been previously recorded
+        } else {
+            if (userAnswer.equals(currentQuestion.getOptions()[0])) {
+                jRadioButton1.setSelected(true);
+            } else if (userAnswer.equals(currentQuestion.getOptions()[1])) {
+                jRadioButton2.setSelected(true);
+            } else if (userAnswer.equals(currentQuestion.getOptions()[2])) {
+                jRadioButton3.setSelected(true);
+            } else if (userAnswer.equals(currentQuestion.getOptions()[3])) {
+                jRadioButton4.setSelected(true);
+            }
+        }
+
         // Repack the frame to adjust to content size changes
         this.pack();
     }
+}
+      private void updateAnswer() {
+        Question currentQuestion = questions.get(currentQuestionIndex);
+        if (jRadioButton1.isSelected()) {
+            currentQuestion.setUserAnswer(jRadioButton1.getText().replaceAll("<html>|</html>", ""));
+        } else if (jRadioButton2.isSelected()) {
+            currentQuestion.setUserAnswer(jRadioButton2.getText().replaceAll("<html>|</html>", ""));
+        } else if (jRadioButton3.isSelected()) {
+            currentQuestion.setUserAnswer(jRadioButton3.getText().replaceAll("<html>|</html>", ""));
+        } else if (jRadioButton4.isSelected()) {
+            currentQuestion.setUserAnswer(jRadioButton4.getText().replaceAll("<html>|</html>", ""));
+        }
 }
   
     /**
@@ -104,7 +145,7 @@ public class QuestionsPage extends javax.swing.JFrame {
         jButtonSubmit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cau hoi trac nghiem");
+        setTitle("Cau hoi trac nghiem - MSSV: " + userMSSV );
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanelContent.setBackground(new java.awt.Color(255, 255, 255));
@@ -242,6 +283,7 @@ public class QuestionsPage extends javax.swing.JFrame {
 
     private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
         // TODO add your handling code here:
+        updateAnswer();
         currentQuestionIndex++;
         if (currentQuestionIndex >= questions.size()) {
         currentQuestionIndex = questions.size() - 1;
@@ -251,6 +293,7 @@ public class QuestionsPage extends javax.swing.JFrame {
 
     private void jButtonPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrevActionPerformed
         // TODO add your handling code here:
+        updateAnswer();
         currentQuestionIndex--;
         if (currentQuestionIndex < 0) {
             currentQuestionIndex = 0; // Không lùi quá câu hỏi đầu tiên
@@ -260,39 +303,39 @@ public class QuestionsPage extends javax.swing.JFrame {
 
     private void jButtonFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFirstActionPerformed
         // TODO add your handling code here:
+        updateAnswer();
          currentQuestionIndex = 0;
         displayQuestion(currentQuestionIndex);
     }//GEN-LAST:event_jButtonFirstActionPerformed
 
     private void jButtonLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLastActionPerformed
         // TODO add your handling code here:
+        updateAnswer();
         currentQuestionIndex = questions.size() - 1;
         displayQuestion(currentQuestionIndex);
     }//GEN-LAST:event_jButtonLastActionPerformed
 
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
         // TODO add your handling code here:
+        updateAnswer(); 
         int score = 0;
     for (Question q : questions) {
-        String selectedAnswer = null;
-        if (jRadioButton1.isSelected() && jRadioButton1.getText().equals(q.getCorrectAnswer())) {
-            score += 5;
-        } else if (jRadioButton2.isSelected() && jRadioButton2.getText().equals(q.getCorrectAnswer())) {
-            score += 5;
-        } else if (jRadioButton3.isSelected() && jRadioButton3.getText().equals(q.getCorrectAnswer())) {
-            score += 5;
-        } else if (jRadioButton4.isSelected() && jRadioButton4.getText().equals(q.getCorrectAnswer())) {
-            score += 5;
+       String userAnswer = q.getUserAnswer().replaceAll("<html>|</html>", "").trim(); 
+        if (userAnswer.equalsIgnoreCase(q.getCorrectAnswer())) { 
+            score += 1;
         }
     }
-//    JOptionPane.showMessageDialog(this, "Điểm của bạn: " + score);
+    JOptionPane.showMessageDialog(this, "Điểm của bạn: " + score);
+    // Confirm exit
+    int response = JOptionPane.showConfirmDialog(this, "Bạn đã hoàn thành! Bạn có muốn thoát không?", "Xác nhận", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+    if (response == JOptionPane.YES_OPTION) {
+        dispose();
+    }
+       
 //      JOptionPane.showMessageDialog(this, "Bạn đã hoàn thành!");
 //      dispose();
-//xác nhận thoát
-      int response = JOptionPane.showConfirmDialog(this, "Bạn đã hoàn thành! Bạn có muốn thoát không?", "Xác nhận", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (response == JOptionPane.YES_OPTION) {
-        dispose(); 
-        }
+        //xác nhận thoát
+        
     }//GEN-LAST:event_jButtonSubmitActionPerformed
 
     /**
@@ -325,7 +368,7 @@ public class QuestionsPage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QuestionsPage().setVisible(true);
+                new QuestionsPage("Username", "UserMSSV").setVisible(true);
             }
         });
     }
