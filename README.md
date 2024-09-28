@@ -13,7 +13,8 @@ CauhoitracnghiemApp: GK Thiet ke ung dung Cau hoi trac nghiem su dung cardlayout
 - **Framework**: Java Swing
 
 ## Cài đặt
-1. Clone repository: ```git clone https://github.com/Hoanghieu2529/CauhoitracnghiemApp.git```
+1. Clone repository:
+ ```git clone https://github.com/Hoanghieu2529/CauhoitracnghiemApp.git```
 2. Mở dự án trong NetBeans.
 3. Chạy ứng dụng.
 
