@@ -26,7 +26,7 @@ CauhoitracnghiemApp: GK Thiet ke ung dung Cau hoi trac nghiem su dung cardlayout
 1. Tải JDK 22:
  ```https://www.oracle.com/java/technologies/javase/jdk22-archive-downloads.html```
 
-3. Tải IDE Netbeans 23:
+2. Tải IDE Netbeans 23:
 ```https://netbeans.apache.org/front/main/download/nb23/```
 
 ## Đóng góp
