@@ -10,7 +10,7 @@ CauhoitracnghiemApp: GK Thiet ke ung dung Cau hoi trac nghiem su dung cardlayout
 ## Công nghệ sử dụng
 - **Ngôn ngữ lập trình**: Java
 - **IDE**: NetBeans
-- **Framework**: Java Swing
+- **Framework**: Java Swing(Cardlayout).
 
 ## Cài đặt
 1. Clone repository:
